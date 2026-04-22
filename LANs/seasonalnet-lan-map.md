@@ -1,7 +1,7 @@
 # SeasonalNet Main LAN — Network Map
 **Subnet:** `192.168.1.0/24`  
 **Gateway:** `192.168.1.1` (Verizon WNC-CR200A)  
-**Last updated:** 2026-04-15
+**Last updated:** 2026-04-22
 
 ---
 
@@ -42,7 +42,8 @@ All VMs hosted on `seasonal-victus` (VirtualBox). Static IPs configured in `/etc
 | `192.168.1.10` | SeasonalWeather | `enp0s8` | Weather radio pipeline, Icecast |
 | `192.168.1.11` | SeasonalUtilities | `enp0s8` | Uptime Kuma (`status.seasonalnet.org`) |
 | `192.168.1.12` | FreePBX17 | `enp0s9` | FreePBX / Asterisk SIP PBX. Also has `enp0s3` (VBox NAT, `10.0.2.15`) and `enp0s8` (Phone-LAN, `192.168.56.10`) |
-| `192.168.1.13 – .19` | *(reserved for future VMs)* | | |
+| `192.168.1.13` | SeasonalMail | `enp0s8` | `mailcow` powered mail server (`mail.seasonalnet.org`) |
+| `192.168.1.14 – .19` | *(reserved for future VMs)* | | |
 
 
 
