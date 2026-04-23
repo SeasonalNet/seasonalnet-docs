@@ -1,7 +1,7 @@
 # SeasonalNet Main LAN — Network Map
 **Subnet:** `192.168.1.0/24`  
 **Gateway:** `192.168.1.1` (Verizon WNC-CR200A)  
-**Last updated:** 2026-04-22
+**Last updated:** 2026-04-23
 
 ---
 
@@ -81,13 +81,18 @@ All VMs hosted on `seasonal-victus` (VirtualBox). Static IPs configured in `/etc
 
 | Rule | Port | Protocol | Forwards To |
 |---|---|---|---|
-| SeasonalFPBX (HTTP) | 80 | TCP | `192.168.1.8` (SeasonalWeb) |
-| SeasonalFPBXHTTPS | 443 | TCP | `192.168.1.8` (SeasonalWeb) |
+| SeasonalWeb-HTTP | 80 | TCP | `192.168.1.8` (SeasonalWeb) |
+| SeasonalWeb-HTTPS | 443 | TCP | `192.168.1.8` (SeasonalWeb) |
 | AstroIAX | 4569 | UDP | `192.168.1.12` (FreePBX17) |
 | SeasonalFPBX RTP | 10000-20000 | UDP | `192.168.1.12` (FreePBX17) |
 | SeasonalPBX SIP | 5060 | Both | `192.168.1.12` (FreePBX17) |
-| SeasonalPBX SIP TLS | 5061 | TCP | `192.168.1.12` (FreePBX17) |
-
+| SeasonalPBX SIP-TLS | 5061 | TCP | `192.168.1.12` (FreePBX17) |
+| SeasonalMail-SMTP | 25 | TCP | `192.168.1.13` (SeasonalMail) |
+| SeasonalMail-Submission | 587 | TCP | `192.168.1.13` (SeasonalMail) |
+| SeasonalMail-SMTPS | 465 | TCP | `192.168.1.13` (SeasonalMail) |
+| SeasonalMail-IMAP | 143 | TCP | `192.168.1.13` (SeasonalMail) |
+| SeasonalMail-POP | 110 | TCP | `192.168.1.13` (SeasonalMail) |
+| SeasonalMail-POP3S | 995 | TCP | `192.168.1.13` (SeasonalMail) |
 ---
 
 ## Known Remaining Items
