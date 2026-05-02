@@ -5,7 +5,7 @@
 **Management IPv6 ULA:** `FD42:42:2::/64`  
 **Voice gateway:** `10.42.0.1` / `FD42:42::1` (SeasonalEDGE-R1 `Gi0/1`)  
 **Management gateway:** `10.42.2.1` / `FD42:42:2::1` (SeasonalEDGE-R1 `Vlan42`)  
-**Last updated:** 2026-04-26
+**Last updated:** 2026-05-02
 
 ---
 
