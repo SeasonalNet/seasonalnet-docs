@@ -53,8 +53,10 @@ Main LAN (192.168.1.0/24)
 
 ## DNS / DHCP
 
+Cloudflare remains authoritative public DNS for `seasonalnet.org`. SeasonalDNS is for internal LAN recursion/local records only.
+
 | Segment | DNS | DHCP |
 |---|---|---|
-| Main LAN | ISP / `192.168.1.1` | Verizon WNC-CR200A |
+| Main LAN | SeasonalDNS / Technitium (`192.168.1.14`) for internal DNS; WNC-CR200A (`192.168.1.1`) remains DHCP/default gateway | Verizon WNC-CR200A |
 | SeasonalCME | SeasonalEDGE-R1 (OSPF 42 domain) | SeasonalEDGE-R1 |
 | Phone-LAN | `dnsmasq` on FreePBX17 (`192.168.56.10`) | `dnsmasq` on FreePBX17 |

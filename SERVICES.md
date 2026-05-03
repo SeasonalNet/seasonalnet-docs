@@ -26,11 +26,17 @@ Role: telephony, call control, phone provisioning, and related communications fu
 
 Boundary: voice systems are part of SeasonalNet's communications domain.
 
-### Auth, Git, and platform support services
+### Auth, Git, DNS, and platform support services
 
-Role: identity, code hosting, and supporting service infrastructure.
+Role: identity, code hosting, internal DNS, and supporting service infrastructure.
 
 Boundary: these services support operator workflows and platform administration.
+
+### SeasonalDNS
+
+Role: internal Main-LAN DNS resolver and local DNS management service, expected to run Technitium DNS Server.
+
+Boundary: SeasonalDNS is not public authoritative DNS for `seasonalnet.org`; Cloudflare remains authoritative for public SeasonalNet DNS.
 
 ### Web front doors and SPAs
 
