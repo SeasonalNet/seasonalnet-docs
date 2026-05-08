@@ -44,6 +44,9 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 | `192.168.1.8` | SeasonalWeb | NGINX reverse proxy / Next.js SPAs |
 | `192.168.1.12` | FreePBX17 | SIP PBX; Phone-LAN gateway (`192.168.56.10`) |
 | `192.168.1.20` | seasonal-victus | VM hypervisor (VirtualBox); this machine |
+| `192.168.1.21` | SeasonalR230 | Dell PowerEdge R230 / Proxmox host on Main LAN via CME rack VLAN 99 transit path |
+| `192.168.1.22` | SeasonalR340 | Dell PowerEdge R340 / onsite backup storage host on Main LAN via CME rack VLAN 99 transit path |
+| `192.168.1.23` | SeasonalR340-iDRAC | Dell PowerEdge R340 out-of-band management on Main LAN via CME rack VLAN 99 transit path |
 | `10.42.0.10` | SeasonalCME-R1 | Cisco CME call control node |
 
 ---
