@@ -47,6 +47,8 @@ These include public front doors, status views, authentication-related services,
 
 These include VM hosts, network topology, observability checks, and supporting operational tooling.
 
+SeasonalMonitor is the current observability spine for infrastructure reachability, dashboards, and later SNMP/Redfish collection. Grafana is exposed publicly at `grafana.seasonalnet.org` through SeasonalWeb with Authentik OAuth/OIDC; Prometheus remains a private backend service.
+
 ## Grounding and truth rules
 
 Documentation describes intended design, stable terminology, and platform reference facts.

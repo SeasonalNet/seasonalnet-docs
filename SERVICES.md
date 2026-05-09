@@ -38,6 +38,16 @@ Role: internal Main-LAN DNS resolver and local DNS management service, expected 
 
 Boundary: SeasonalDNS is not public authoritative DNS for `seasonalnet.org`; Cloudflare remains authoritative for public SeasonalNet DNS.
 
+### SeasonalMonitor
+
+Role: first-pass observability spine for SeasonalNet infrastructure.
+
+SeasonalMonitor runs on `192.168.1.15` and provides Prometheus, Grafana, blackbox_exporter, snmp_exporter, and host-native node_exporter. Its first targets are SeasonalMonitor itself, SeasonalDNS, SeasonalR230, R230 iDRAC, and SeasonalCME-SW2 / CME rack backhaul reachability.
+
+Grafana is publicly reachable at `https://grafana.seasonalnet.org` through SeasonalWeb and uses Authentik OAuth/OIDC. A local Grafana admin account is retained as break-glass access. Prometheus remains private and should not be published directly.
+
+Boundary: SeasonalMonitor is observability infrastructure. It does not replace SeasonalAgent, does not mutate infrastructure, and should not become a custom monitoring platform before the standard Prometheus/Grafana/SNMP/Redfish foundation is complete.
+
 ### Web front doors and SPAs
 
 Role: browser-facing interfaces for platform functions such as docs, radio, PBX, provisioning, agent access, or status views.
@@ -45,6 +55,8 @@ Role: browser-facing interfaces for platform functions such as docs, radio, PBX,
 Boundary: a web front door may expose part of SeasonalNet, but not the full live platform state by itself.
 
 ## Observability boundaries
+
+SeasonalMonitor is the central first-pass metrics and dashboarding system. Grafana is the human-facing dashboard front end; Prometheus is the private metrics backend; exporters collect host, reachability, SNMP, and later Redfish state.
 
 Seasonal Agent may inspect some parts of SeasonalNet through configured tools and caller context.
 
