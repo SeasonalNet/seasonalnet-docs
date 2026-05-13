@@ -31,7 +31,7 @@ Static markdown documentation for SeasonalNet, a self-managed homelab operating 
 | SeasonalCME Management | `10.42.2.0/24` (VLAN 42) | `LANs/seasonalcme-network-map.md` |
 | Phone-LAN | `192.168.56.0/24` | `LANs/phonelan-map.md` |
 
-All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behind `SeasonalEDGE-R1` (`192.168.1.4`). Phone-LAN is routed by `FreePBX17` (`192.168.1.12`).
+All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behind `SeasonalEDGE-R1` (`192.168.1.4`). Phone-LAN is routed by `SeasonalPBX` (`192.168.1.12`, Phone-LAN gateway `192.168.56.1`).
 
 ---
 
@@ -42,7 +42,7 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 | `192.168.1.1` | Verizon WNC-CR200A | Internet gateway |
 | `192.168.1.4` | SeasonalEDGE-R1 | SeasonalCME lab edge router |
 | `192.168.1.8` | SeasonalWeb | NGINX reverse proxy / Next.js SPAs |
-| `192.168.1.12` | FreePBX17 | SIP PBX; Phone-LAN gateway (`192.168.56.10`) |
+| `192.168.1.12` | SeasonalPBX | SIP PBX; Phone-LAN gateway (`192.168.56.1`) |
 | `192.168.1.20` | seasonal-victus | VM hypervisor (VirtualBox); this machine |
 | `192.168.1.21` | SeasonalR230 | Dell PowerEdge R230 / Proxmox host on Main LAN via CME rack VLAN 99 transit path |
 | `192.168.1.22` | SeasonalR340 | Dell PowerEdge R340 / onsite backup storage host on Main LAN via CME rack VLAN 99 transit path |
@@ -56,7 +56,7 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 - Each LAN map includes: address bands, infrastructure device table, routing/services boundary, topology ASCII summary, and a "Known Remaining Items" section for deferred work.
 - Static addresses are configured on-device (VMs: `/etc/network/interfaces`; Cisco gear: in running-config). DHCP pools are documented by range only.
 - IPv6 ULA is deployed on Phone-LAN (`FD42:56::/64`) and SeasonalCME (`FD42:42::/64`, `FD42:42:2::/64`). Main LAN IPv6 is native ISP-assigned.
-- Gateway addresses are intentionally non-standard in some segments (e.g., Phone-LAN gateway is `.10`, not `.1`).
+- Phone-LAN now uses the conventional `.1` gateway on SeasonalPBX; older FreePBX17-era references to `.10` are retired/stale.
 
 ---
 

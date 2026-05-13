@@ -20,9 +20,9 @@ Role: weather, alerting, broadcast, and related operational workflows.
 
 Boundary: SeasonalWeather is one subsystem within SeasonalNet, not a synonym for the whole platform.
 
-### FreePBX, CME, and phone services
+### SeasonalPBX, CME, and phone services
 
-Role: telephony, call control, phone provisioning, and related communications functions.
+Role: telephony, call control, phone provisioning, and related communications functions. SeasonalPBX is the current FreePBX/Asterisk VM and Phone-LAN gateway at `192.168.1.12` / `192.168.56.1`; it replaced the retired legacy FreePBX17 VM.
 
 Boundary: voice systems are part of SeasonalNet's communications domain.
 
@@ -47,6 +47,10 @@ SeasonalMonitor runs on `192.168.1.15` and provides Prometheus, Grafana, blackbo
 Grafana is publicly reachable at `https://grafana.seasonalnet.org` through SeasonalWeb and uses Authentik OAuth/OIDC. A local Grafana admin account is retained as break-glass access. Prometheus remains private and should not be published directly.
 
 Boundary: SeasonalMonitor is observability infrastructure. It does not replace SeasonalAgent, does not mutate infrastructure, and should not become a custom monitoring platform before the standard Prometheus/Grafana/SNMP/Redfish foundation is complete.
+
+### Retired systems
+
+SeasonalUtilities is retired. It previously occupied `192.168.1.11` and hosted utility functions such as Uptime Kuma / `status.seasonalnet.org`, but the VM has been archived and removed from the active VirtualBox inventory. Treat `192.168.1.11` as reserved until a replacement utility/status host is deliberately assigned.
 
 ### Web front doors and SPAs
 
