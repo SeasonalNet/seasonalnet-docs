@@ -14,11 +14,13 @@ Role: local assistant runtime for operator-facing support, reasoning, and bounde
 
 Boundary: answers about live state should use tools when available.
 
-### SeasonalWeather
+### SeasonalWeather / SeasonalWX
 
 Role: weather, alerting, broadcast, and related operational workflows.
 
-Boundary: SeasonalWeather is one subsystem within SeasonalNet, not a synonym for the whole platform.
+The current SeasonalWeather runtime VM is **SeasonalWX** at `192.168.1.10`. It replaced the older VM named SeasonalWeather, which is now retired. Internal DNS aliases for the current VM include `wx.lan.seasonalnet.org`, `seasonalwx.lan.seasonalnet.org`, and `seasonalweather.lan.seasonalnet.org`. SeasonalWX exposes the SeasonalWeather API through an nginx LAN-side reverse proxy on HTTP port 80, with application routes under `/v1/...` rather than `/api/v1/...`.
+
+Boundary: SeasonalWeather is one subsystem within SeasonalNet, not a synonym for the whole platform. VM naming should distinguish the current host `SeasonalWX` from the broader SeasonalWeather service/subsystem.
 
 ### SeasonalPBX, CME, and phone services
 
@@ -26,9 +28,9 @@ Role: telephony, call control, phone provisioning, and related communications fu
 
 Boundary: voice systems are part of SeasonalNet's communications domain.
 
-### Auth, Git, DNS, and platform support services
+### Auth, Git, DNS, mail, and platform support services
 
-Role: identity, code hosting, internal DNS, and supporting service infrastructure.
+Role: identity, code hosting, internal DNS, mail, and supporting service infrastructure. SeasonalMail is the mailcow-backed mail server at `192.168.1.13` for `mail.seasonalnet.org`.
 
 Boundary: these services support operator workflows and platform administration.
 
@@ -42,13 +44,25 @@ Boundary: SeasonalDNS is not public authoritative DNS for `seasonalnet.org`; Clo
 
 Role: first-pass observability spine for SeasonalNet infrastructure.
 
-SeasonalMonitor runs on `192.168.1.15` and provides Prometheus, Grafana, blackbox_exporter, snmp_exporter, and host-native node_exporter. Its first targets are SeasonalMonitor itself, SeasonalDNS, SeasonalR230, R230 iDRAC, and SeasonalCME-SW2 / CME rack backhaul reachability.
+SeasonalMonitor runs on `192.168.1.15` and provides Prometheus, Grafana, blackbox_exporter, snmp_exporter, and host-native node_exporter. Its first targets are SeasonalMonitor itself, SeasonalDNS, SeasonalR230, R230 iDRAC, SeasonalR340 / R340 iDRAC, and SeasonalCME-SW2 / CME rack backhaul reachability.
 
 Grafana is publicly reachable at `https://grafana.seasonalnet.org` through SeasonalWeb and uses Authentik OAuth/OIDC. A local Grafana admin account is retained as break-glass access. Prometheus remains private and should not be published directly.
 
 Boundary: SeasonalMonitor is observability infrastructure. It does not replace SeasonalAgent, does not mutate infrastructure, and should not become a custom monitoring platform before the standard Prometheus/Grafana/SNMP/Redfish foundation is complete.
 
+### SeasonalR340 and SeasonalBack
+
+Role: Proxmox host and backup service for local SeasonalNet infrastructure.
+
+SeasonalR340 is the Dell PowerEdge R340 Proxmox host at `192.168.1.22`, with iDRAC at `192.168.1.23`. It is connected through the CME rack VLAN 99 Main-LAN transit path and is intended for the on-site backup/PBS role with limited light compute allowance.
+
+SeasonalBack is the Proxmox Backup Server VM hosted on SeasonalR340. It uses `192.168.1.16`; `seasonalback.lan.seasonalnet.org` resolves to that address, and `back.lan.seasonalnet.org` is a service alias. Its datastore is named `seasonalback` at `/mnt/datastore/seasonalback`. The current datastore backing is the PBS VM root filesystem / single virtual disk, not a separate mounted data disk.
+
+Boundary: SeasonalBack is the backup service VM. SeasonalR340 is the hypervisor and hardware platform. Do not document PBS as running directly on the R340 host unless that design changes.
+
 ### Retired systems
+
+The older VM named SeasonalWeather is retired and replaced by SeasonalWX at `192.168.1.10`. Keep `SeasonalWeather` as the subsystem/service name, but use `SeasonalWX` for the current VM host.
 
 SeasonalUtilities is retired. It previously occupied `192.168.1.11` and hosted utility functions such as Uptime Kuma / `status.seasonalnet.org`, but the VM has been archived and removed from the active VirtualBox inventory. Treat `192.168.1.11` as reserved until a replacement utility/status host is deliberately assigned.
 

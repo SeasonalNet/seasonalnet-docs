@@ -31,7 +31,7 @@ Seasonal Agent is a subsystem of SeasonalNet. It is not the whole platform.
 
 ### SeasonalWeather
 
-SeasonalWeather is the weather, alerting, and radio-oriented subsystem.
+SeasonalWeather is the weather, alerting, and radio-oriented subsystem. The current runtime VM is SeasonalWX at `192.168.1.10`; the older VM named SeasonalWeather has been retired and replaced.
 
 SeasonalWeather is an important subsystem within SeasonalNet, but it does not define all of SeasonalNet.
 
@@ -45,7 +45,7 @@ These include public front doors, status views, authentication-related services,
 
 ### Infrastructure and operations
 
-These include VM hosts, network topology, observability checks, and supporting operational tooling.
+These include VM hosts, network topology, observability checks, backup systems, and supporting operational tooling. SeasonalR230 and SeasonalR340 are the active Proxmox hosts; SeasonalR340 also hosts the SeasonalBack Proxmox Backup Server VM.
 
 SeasonalMonitor is the current observability spine for infrastructure reachability, dashboards, and later SNMP/Redfish collection. Grafana is exposed publicly at `grafana.seasonalnet.org` through SeasonalWeb with Authentik OAuth/OIDC; Prometheus remains a private backend service.
 
