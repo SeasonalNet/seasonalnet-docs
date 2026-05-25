@@ -1,7 +1,7 @@
 # SeasonalNet Main LAN — Network Map
 **Subnet:** `192.168.1.0/24`  
 **Gateway:** `192.168.1.1` (Verizon WNC-CR200A)  
-**Last updated:** 2026-05-15
+**Last updated:** 2026-05-24
 
 ---
 
@@ -31,7 +31,7 @@
 
 ## VM / Server Band (`.6 – .19`)
 
-VMs in this band are static-addressed service hosts. Most are hosted on `seasonal-victus` unless noted; SeasonalBack is hosted on SeasonalR340 Proxmox. Static IPs are configured in-guest.
+VMs in this band are static-addressed service hosts. Most are hosted on `SeasonalR230` unless noted; Static IPs are configured in-guest.
 
 | IP | VM | Interface | Notes |
 |---|---|---|---|
