@@ -48,8 +48,8 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 | `192.168.1.14` | SeasonalDNS | Internal Technitium DNS resolver / local DNS management |
 | `192.168.1.15` | SeasonalMonitor | Prometheus/Grafana observability VM |
 | `192.168.1.16` | SeasonalBack | Proxmox Backup Server VM hosted on SeasonalR340 |
-| `192.168.1.20` | seasonal-victus | VM hypervisor (VirtualBox); this machine |
-| `192.168.1.21` | SeasonalR230 | Dell PowerEdge R230 / Proxmox host on Main LAN via CME rack VLAN 99 transit path |
+| `192.168.1.20` | seasonal-victus | Ubuntu desktop/admin workstation; no longer primary VM host |
+| `192.168.1.21` | SeasonalR230 | Dell PowerEdge R230 / primary Proxmox VM host on Main LAN via CME rack VLAN 99 transit path |
 | `192.168.1.22` | SeasonalR340 | Dell PowerEdge R340 / Proxmox host on Main LAN via CME rack VLAN 99 transit path |
 | `192.168.1.23` | SeasonalR340-iDRAC | Dell PowerEdge R340 out-of-band management on Main LAN via CME rack VLAN 99 transit path |
 | `10.42.0.10` | SeasonalCME-R1 | Cisco CME call control node |
@@ -74,11 +74,11 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 
 ---
 
-## Future: docs.seasonalnet.org
+## Published Docs Site
 
-Long-term goal is to publish this documentation at `docs.seasonalnet.org` via [Fumadocs](https://fumadocs.vercel.app/) integrated into the SeasonalWeb Next.js deployment. Design requirements:
+This documentation is published at `docs.seasonalnet.org` through the SeasonalWeb / SeasonalNet Next.js docs deployment. Design and publication requirements:
 
 - Shared header and footer consistent with all other SeasonalNet SPAs
 - Black and white theming (no color accent palette outside of monochrome)
-- Source content from this documentation set (file-system routing via Fumadocs MDX)
+- Source content from this documentation set
 - `VMs/` must be excluded from any published or version-controlled source

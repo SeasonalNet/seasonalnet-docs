@@ -45,9 +45,11 @@ These include public front doors, status views, authentication-related services,
 
 ### Infrastructure and operations
 
-These include VM hosts, network topology, observability checks, backup systems, and supporting operational tooling. SeasonalR230 and SeasonalR340 are the active Proxmox hosts; SeasonalR340 also hosts the SeasonalBack Proxmox Backup Server VM.
+These include VM hosts, network topology, observability checks, backup systems, and supporting operational tooling. SeasonalR230 and SeasonalR340 are the active Proxmox hosts. SeasonalR230 is the primary VM host for the current service fleet. SeasonalR340 hosts the SeasonalBack Proxmox Backup Server VM.
 
-SeasonalMonitor is the current observability spine for infrastructure reachability, dashboards, and later SNMP/Redfish collection. Grafana is exposed publicly at `grafana.seasonalnet.org` through SeasonalWeb with Authentik OAuth/OIDC; Prometheus remains a private backend service.
+The active R230 service fleet is SeasonalDNS (VMID 101), SeasonalAuth (102), SeasonalForge (103), SeasonalMail (104), SeasonalMonitor (105), SeasonalPBX (106), SeasonalWX (107), SeasonalRain (108), and SeasonalWeb / SeasonalNet (109). These VMs have QEMU Guest Agent enabled/responding, Proxmox autostart configured, and verified PBS backups on SeasonalBack.
+
+SeasonalMonitor is the current observability spine for infrastructure reachability, dashboards, SNMP, and Redfish collection. Grafana is exposed publicly at `grafana.seasonalnet.org` through SeasonalWeb with Authentik OAuth/OIDC; Prometheus remains a private backend service.
 
 ## Grounding and truth rules
 
