@@ -48,9 +48,11 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 | `192.168.1.14` | SeasonalDNS | Internal Technitium DNS resolver / local DNS management |
 | `192.168.1.15` | SeasonalMonitor | Prometheus/Grafana observability VM |
 | `192.168.1.16` | SeasonalBack | Proxmox Backup Server VM hosted on SeasonalR340 |
+| `192.168.1.17` | SeasonalNAS | NAS / shared storage VM hosted on SeasonalR340 |
+| `192.168.1.18` | SeasonalSand | sandbox execution service VM hosted on SeasonalR340 |
 | `192.168.1.20` | seasonal-victus | Ubuntu desktop/admin workstation; no longer primary VM host |
 | `192.168.1.21` | SeasonalR230 | Dell PowerEdge R230 / primary Proxmox VM host on Main LAN via CME rack VLAN 99 transit path |
-| `192.168.1.22` | SeasonalR340 | Dell PowerEdge R340 / Proxmox host on Main LAN via CME rack VLAN 99 transit path |
+| `192.168.1.22` | SeasonalR340 | Dell PowerEdge R340 / Proxmox host on Main LAN via CME rack VLAN 99 transit path; hosts SeasonalBack, SeasonalNAS, and SeasonalSand |
 | `192.168.1.23` | SeasonalR340-iDRAC | Dell PowerEdge R340 out-of-band management on Main LAN via CME rack VLAN 99 transit path |
 | `10.42.0.10` | SeasonalCME-R1 | Cisco CME call control node |
 

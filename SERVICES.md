@@ -58,15 +58,32 @@ SeasonalR230 is the Dell PowerEdge R230 Proxmox host at `192.168.1.21`, with iDR
 
 Boundary: SeasonalR230 is the primary VM host, not the backup service. Backup service ownership remains with SeasonalBack.
 
+
+### SeasonalNAS
+
+Role: shared storage / NAS service VM for SeasonalNet support workloads.
+
+SeasonalNAS is a Debian 13 VM hosted on SeasonalR340 as Proxmox VMID `110`. It uses `192.168.1.17` on Main LAN via interface `ens18`, with hostname/DNS `seasonalnas.lan.seasonalnet.org`. It provides shared storage paths used by other internal services; SeasonalSand mounts SeasonalNAS-backed workspace and artifact paths for sandbox job execution.
+
+Boundary: SeasonalNAS is the storage service VM, not the R340 hypervisor itself. Do not treat Docker bridge addresses on SeasonalNAS as routed Main-LAN service addresses.
+
+### SeasonalSand / SeasonalSandbox
+
+Role: isolated sandbox execution service for bounded internal automation workloads.
+
+SeasonalSand is a Debian 13 VM hosted on SeasonalR340 as Proxmox VMID `111`. It uses `192.168.1.18` on Main LAN via interface `ens18`, with hostname/DNS `seasonalsand.lan.seasonalnet.org`. It runs `seasonal-sandboxd` under Docker Compose. The sandbox API is bound host-local inside the VM on `127.0.0.1:9090`, and the service uses SeasonalNAS-backed workspace and artifact paths.
+
+Boundary: SeasonalSand is a controlled execution/sandbox service. It should not be documented as a general-purpose shell host, public API, or replacement for Seasonal Agent.
+
 ### SeasonalR340 and SeasonalBack
 
-Role: secondary Proxmox host and backup service platform for local SeasonalNet infrastructure.
+Role: secondary Proxmox host and backup/storage/sandbox support platform for local SeasonalNet infrastructure.
 
-SeasonalR340 is the Dell PowerEdge R340 Proxmox host at `192.168.1.22`, with iDRAC at `192.168.1.23`. It is connected through the CME rack VLAN 99 Main-LAN transit path and hosts SeasonalBack.
+SeasonalR340 is the Dell PowerEdge R340 Proxmox host at `192.168.1.22`, with iDRAC at `192.168.1.23`. It is connected through the CME rack VLAN 99 Main-LAN transit path and hosts SeasonalBack (VMID 100), SeasonalNAS (VMID 110), and SeasonalSand (VMID 111).
 
 SeasonalBack is the Proxmox Backup Server VM hosted on SeasonalR340. It uses `192.168.1.16`; `seasonalback.lan.seasonalnet.org` resolves to that address, and `back.lan.seasonalnet.org` is a service alias. Its datastore is named `seasonalback` at `/mnt/datastore/seasonalback`. The current datastore backing is the PBS VM root filesystem / single virtual disk, not a separate mounted data disk.
 
-Boundary: SeasonalBack is the backup service VM. SeasonalR340 is the hypervisor and hardware platform. Do not document PBS as running directly on the R340 host unless that design changes.
+Boundary: SeasonalBack is the backup service VM. SeasonalNAS is the storage service VM. SeasonalSand is the sandbox service VM. SeasonalR340 is the hypervisor and hardware platform. Do not document PBS, NAS, or sandbox services as running directly on the R340 host unless that design changes.
 
 ### Retired systems
 
