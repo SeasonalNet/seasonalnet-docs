@@ -16,7 +16,10 @@ Static markdown documentation for SeasonalNet, a self-managed homelab operating 
 |---|---|---|
 | `README.md` | Human-facing overview | Yes |
 | `AGENTS.md` | This file | Yes |
-| `NETWORK.md` | Top-level network segment index | Yes |
+| `PLATFORM.md` | Public-safe platform overview and boundaries | Yes |
+| `SERVICES.md` | Public-safe service catalog and subsystem reference | Yes |
+| `NETWORK.md` | Top-level topology and network segment index | Yes |
+| `PROJECTS.md` | Projects/guides section root for future public FOSS documentation | Yes |
 | `LANs/` | Per-segment network maps | Yes |
 | `VMs/` | Per-VM host config and credentials | **NO — never commit, never publish** |
 
@@ -83,4 +86,5 @@ This documentation is published at `docs.seasonalnet.org` through the SeasonalWe
 - Shared header and footer consistent with all other SeasonalNet SPAs
 - Black and white theming (no color accent palette outside of monochrome)
 - Source content from this documentation set
+- The rendered docs site should expose broad sections such as About, Topology, and Projects rather than treating topology as the whole site
 - `VMs/` must be excluded from any published or version-controlled source

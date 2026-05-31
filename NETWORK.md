@@ -1,4 +1,4 @@
-# SeasonalNet — Network Overview
+# SeasonalNet — Topology Overview
 
 Top-level index of all SeasonalNet network segments. For full topology detail, see the per-segment map files in `LANs/`.
 
