@@ -1,4 +1,4 @@
-# SeasonalNet Projects and Guides
+# Projects
 
 ## Purpose
 
