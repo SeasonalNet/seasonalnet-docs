@@ -44,7 +44,10 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 |---|---|---|
 | `192.168.1.1` | Verizon WNC-CR200A | Internet gateway |
 | `192.168.1.4` | SeasonalEDGE-R1 | SeasonalCME lab edge router |
-| `192.168.1.8` | SeasonalWeb | NGINX reverse proxy / Next.js SPAs |
+| `192.168.1.6` | SeasonalAuth | Authentik / identity service |
+| `192.168.1.7` | SeasonalForge | Forgejo / source control |
+| `192.168.1.8` | SeasonalWeb / SeasonalNet | NGINX reverse proxy / Next.js SPAs / docs site |
+| `192.168.1.9` | SeasonalRain | Discord bot/service VM |
 | `192.168.1.10` | SeasonalWX | Current SeasonalWeather VM / weather radio pipeline and API |
 | `192.168.1.12` | SeasonalPBX | SIP PBX; Phone-LAN gateway (`192.168.56.1`) |
 | `192.168.1.13` | SeasonalMail | mailcow mail server (`mail.seasonalnet.org`) |
@@ -52,14 +55,16 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 | `192.168.1.15` | SeasonalMonitor | Prometheus/Grafana observability VM |
 | `192.168.1.16` | SeasonalBack | Proxmox Backup Server VM hosted on SeasonalR340 |
 | `192.168.1.17` | SeasonalNAS | NAS / shared storage VM hosted on SeasonalR340 |
-| `192.168.1.18` | SeasonalSand | sandbox execution service VM hosted on SeasonalR340 |
-| `192.168.1.20` | seasonal-victus | Ubuntu desktop/admin workstation; no longer primary VM host |
-| `192.168.1.21` | SeasonalR230 | Dell PowerEdge R230 / primary Proxmox VM host on Main LAN via CME rack VLAN 99 transit path |
-| `192.168.1.22` | SeasonalR340 | Dell PowerEdge R340 / Proxmox host on Main LAN via CME rack VLAN 99 transit path; hosts SeasonalBack, SeasonalNAS, and SeasonalSand |
-| `192.168.1.23` | SeasonalR340-iDRAC | Dell PowerEdge R340 out-of-band management on Main LAN via CME rack VLAN 99 transit path |
+| `192.168.1.18` | SeasonalSand | Sandbox execution service VM hosted on SeasonalR340 |
+| `192.168.1.19` | SeasonalDB | PostgreSQL database host for control-plane state |
+| `192.168.1.20` | SeasonalDock | Docker/control-plane application host; currently hosts `pbx-controld` |
+| `192.168.1.30` | SeasonalR230 | Dell PowerEdge R230 / primary Proxmox VM host on Main LAN via CME rack VLAN 99 transit path |
+| `192.168.1.31` | SeasonalR340 | Dell PowerEdge R340 / Proxmox host on Main LAN via CME rack VLAN 99 transit path |
+| `192.168.1.32` | SeasonalR230-iDRAC | Dell PowerEdge R230 out-of-band management |
+| `192.168.1.33` | SeasonalR340-iDRAC | Dell PowerEdge R340 out-of-band management |
+| `192.168.1.40` | seasonal-victus | Ubuntu desktop/admin workstation |
+| `192.168.1.41` | seasonal-teal-laptop | Ubuntu admin/build laptop |
 | `10.42.0.10` | SeasonalCME-R1 | Cisco CME call control node |
-
----
 
 ## Documentation Conventions
 
