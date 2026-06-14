@@ -32,9 +32,9 @@ Static markdown documentation for SeasonalNet, a self-managed homelab operating 
 | Main LAN | `192.168.1.0/24` | `LANs/seasonalnet-lan-map.md` |
 | SeasonalCME Voice | `10.42.0.0/24` (VLAN 10) | `LANs/seasonalcme-network-map.md` |
 | SeasonalCME Management | `10.42.2.0/24` (VLAN 42) | `LANs/seasonalcme-network-map.md` |
-| Phone-LAN | `192.168.56.0/24` | `LANs/phonelan-map.md` |
+| Phone-LAN | `10.30.0.0/24`, `fd42:30::/64` | `LANs/phonelan-map.md` |
 
-All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behind `SeasonalEDGE-R1` (`192.168.1.4`). Phone-LAN is routed by `SeasonalPBX` (`192.168.1.12`, Phone-LAN gateway `192.168.56.1`).
+All segments are reachable from `192.168.1.0/24` when routing policy permits. SeasonalCME segments are behind `SeasonalEDGE-R1` (`192.168.1.4`). Phone-LAN has moved to `10.30.0.0/24` / `fd42:30::/64`; SeasonalPBX (`192.168.1.12`) is now a PBX service VM only and must not be documented as the Phone-LAN router, NAT boundary, DHCP server, or RA source.
 
 ---
 
@@ -49,7 +49,7 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 | `192.168.1.8` | SeasonalWeb / SeasonalNet | NGINX reverse proxy / Next.js SPAs / docs site |
 | `192.168.1.9` | SeasonalRain | Discord bot/service VM |
 | `192.168.1.10` | SeasonalWX | Current SeasonalWeather VM / weather radio pipeline and API |
-| `192.168.1.12` | SeasonalPBX | SIP PBX; Phone-LAN gateway (`192.168.56.1`) |
+| `192.168.1.12` | SeasonalPBX | SIP PBX / Asterisk service VM; not Phone-LAN router |
 | `192.168.1.13` | SeasonalMail | mailcow mail server (`mail.seasonalnet.org`) |
 | `192.168.1.14` | SeasonalDNS | Internal Technitium DNS resolver / local DNS management |
 | `192.168.1.15` | SeasonalMonitor | Prometheus/Grafana observability VM |
@@ -58,6 +58,7 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 | `192.168.1.18` | SeasonalSand | Sandbox execution service VM hosted on SeasonalR340 |
 | `192.168.1.19` | SeasonalDB | PostgreSQL database host for control-plane state |
 | `192.168.1.20` | SeasonalDock | Docker/control-plane application host; currently hosts `pbx-controld` |
+| `192.168.1.21` | SeasonalCA | LAN private CA / Smallstep step-ca host |
 | `192.168.1.30` | SeasonalR230 | Dell PowerEdge R230 / primary Proxmox VM host on Main LAN via CME rack VLAN 99 transit path |
 | `192.168.1.31` | SeasonalR340 | Dell PowerEdge R340 / Proxmox host on Main LAN via CME rack VLAN 99 transit path |
 | `192.168.1.32` | SeasonalR230-iDRAC | Dell PowerEdge R230 out-of-band management |
@@ -70,8 +71,8 @@ All segments are reachable from `192.168.1.0/24`. SeasonalCME segments are behin
 
 - Each LAN map includes: address bands, infrastructure device table, routing/services boundary, topology ASCII summary, and a "Known Remaining Items" section for deferred work.
 - Static addresses are configured on-device (VMs: `/etc/network/interfaces`; Cisco gear: in running-config). DHCP pools are documented by range only.
-- IPv6 ULA is deployed on Phone-LAN (`FD42:56::/64`) and SeasonalCME (`FD42:42::/64`, `FD42:42:2::/64`). Main LAN IPv6 is native ISP-assigned.
-- Phone-LAN now uses the conventional `.1` gateway on SeasonalPBX; older FreePBX17-era references to `.10` are retired/stale.
+- IPv6 ULA is deployed on Phone-LAN (`fd42:30::/64`) and SeasonalCME (`FD42:42::/64`, `FD42:42:2::/64`). Main LAN IPv6 is native ISP-assigned.
+- Phone-LAN no longer uses SeasonalPBX as its router. The `10.30.0.1` / `fd42:30::1` gateway reservation belongs to the Phone-LAN routing boundary and its owner is pending managed-switch/trunk documentation.
 
 ---
 

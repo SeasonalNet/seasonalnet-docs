@@ -24,7 +24,7 @@ Pages:
 - [Topology overview](NETWORK.md) — top-level topology and segment index
 - [Main LAN](LANs/seasonalnet-lan-map.md) — Main LAN (`192.168.1.0/24`)
 - [SeasonalCME](LANs/seasonalcme-network-map.md) — SeasonalCME lab (`10.42.0.0/24`, `10.42.2.0/24`)
-- [Phone-LAN](LANs/phonelan-map.md) — Phone-LAN (`192.168.56.0/24`)
+- [Phone-LAN](LANs/phonelan-map.md) — Phone-LAN (`10.30.0.0/24`)
 
 ### Projects
 
@@ -49,7 +49,7 @@ SeasonalNet-Documentation/
 └── LANs/
     ├── seasonalnet-lan-map.md     # Main LAN (192.168.1.0/24)
     ├── seasonalcme-network-map.md # SeasonalCME lab (10.42.0.0/24, 10.42.2.0/24)
-    └── phonelan-map.md            # Phone-LAN (192.168.56.0/24)
+    └── phonelan-map.md            # Phone-LAN (10.30.0.0/24)
 ```
 
 > `VMs/` exists locally but is excluded from any repository or published documentation. It contains host-level credentials and per-VM configuration detail that must not be committed or shared.
