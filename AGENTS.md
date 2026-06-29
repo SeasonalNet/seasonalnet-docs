@@ -20,6 +20,8 @@ Static markdown documentation for SeasonalNet, a self-managed homelab operating 
 | `SERVICES.md` | Public-safe service catalog and subsystem reference | Yes |
 | `NETWORK.md` | Top-level topology and network segment index | Yes |
 | `PROJECTS.md` | Projects/guides section root for future public FOSS documentation | Yes |
+| `POLICIES.md` | Platform policies section root | Yes |
+| `Policies/` | Privacy Notice, Terms of Service, and Acceptable Use Policy | Yes |
 | `LANs/` | Per-segment network maps | Yes |
 | `VMs/` | Per-VM host config and credentials | **NO — never commit, never publish** |
 
@@ -81,6 +83,8 @@ All segments are reachable from `192.168.1.0/24` when routing policy permits. Se
 - Update the `Last updated` date in any LAN map you modify.
 - Do not modify `VMs/` content through any automated process.
 - If adding a new segment, create a new map file in `LANs/` following the existing structure, and add an entry to `NETWORK.md`.
+- Keep platform policies under `Policies/`, with `POLICIES.md` as the public section index. Community or communication-platform rules do not belong in these platform policy documents.
+- Policy changes must update the effective or last-updated date as appropriate and must remain consistent across the Privacy Notice, Terms of Service, and Acceptable Use Policy.
 - Do not commit secrets, credentials, or per-VM sensitive configuration under any path.
 
 ---
@@ -92,5 +96,5 @@ This documentation is published at `docs.seasonalnet.org` through the SeasonalWe
 - Shared header and footer consistent with all other SeasonalNet SPAs
 - Black and white theming (no color accent palette outside of monochrome)
 - Source content from this documentation set
-- The rendered docs site should expose broad sections such as About, Topology, and Projects rather than treating topology as the whole site
+- The rendered docs site should expose broad sections such as About, Topology, Projects, and Policies rather than treating topology as the whole site
 - `VMs/` must be excluded from any published or version-controlled source

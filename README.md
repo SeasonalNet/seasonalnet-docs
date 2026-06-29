@@ -34,6 +34,17 @@ Pages:
 
 - [Projects and guides](PROJECTS.md) — section purpose and publication boundaries for future project guides
 
+### Policies
+
+Platform-wide terms, privacy practices, and acceptable-use requirements for SeasonalNet-operated services. Communication-platform community rules remain separate from these platform policies.
+
+Pages:
+
+- [Policies overview](POLICIES.md) — scope and relationship between the policy documents
+- [Privacy Notice](Policies/privacy.md) — operational, account, service, and security information handling
+- [Terms of Service](Policies/terms.md) — conditions for accessing and using SeasonalNet services
+- [Acceptable Use Policy](Policies/acceptable-use.md) — prohibited activity and enforcement controls
+
 ---
 
 ## Repository structure
@@ -46,6 +57,11 @@ SeasonalNet-Documentation/
 ├── SERVICES.md        # About / service catalog
 ├── NETWORK.md         # Topology overview and segment index
 ├── PROJECTS.md        # Projects and guides section root
+├── POLICIES.md        # Platform policies section root
+├── Policies/
+│   ├── privacy.md      # Privacy Notice
+│   ├── terms.md        # Terms of Service
+│   └── acceptable-use.md # Acceptable Use Policy
 └── LANs/
     ├── seasonalnet-lan-map.md     # Main LAN (192.168.1.0/24)
     ├── seasonalcme-network-map.md # SeasonalCME lab (10.42.0.0/24, 10.42.2.0/24)
@@ -66,6 +82,7 @@ This documentation may cover:
 - Routing, NAT, and services boundaries
 - Physical switch port maps where applicable
 - Public FOSS project reference material and deployment/customization guides
+- Platform-wide privacy, terms-of-service, and acceptable-use policies
 - Known gaps and deferred cleanup items when they are public-safe
 
 It does **not** cover:
