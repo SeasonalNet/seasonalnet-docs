@@ -33,8 +33,6 @@ Defguard may assign host routes such as `/32` and `/128` to individual clients e
 | `192.168.1.22` | SeasonalVPN VM | `ens18` | Debian 13 VM hosted on SeasonalR230 as VMID `115` |
 | `10.88.0.1/24` | Defguard gateway | `wg0` | VPN IPv4 gateway |
 | `fd97:418:22dd:88::1/64` | Defguard gateway | `wg0` | VPN IPv6 ULA gateway |
-| `10.88.0.3/32` | seasonal-teal-laptop | Defguard client tunnel | Current documented Teal IPv4 assignment |
-| `fd97:418:22dd:88::3/128` | seasonal-teal-laptop | Defguard client tunnel | Current documented Teal IPv6 ULA assignment |
 
 Internal DNS names:
 
