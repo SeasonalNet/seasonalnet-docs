@@ -1,7 +1,7 @@
 # SeasonalNet Policies
 
-**Effective date:** June 29, 2026
-**Last updated:** June 29, 2026
+- **Effective date:** June 29, 2026
+- **Last updated:** June 29, 2026
 
 These policies describe the conditions under which SeasonalNet-operated services may be used and how SeasonalNet processes information required to operate and protect those services.
 
