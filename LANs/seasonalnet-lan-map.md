@@ -1,7 +1,7 @@
 # SeasonalNet Main LAN — Network Map
-**Subnet:** `192.168.1.0/24`
-**Gateway:** `192.168.1.1` (Verizon WNC-CR200A)
-**Last updated:** 2026-06-29
+- **Subnet:** `192.168.1.0/24`
+- **Gateway:** `192.168.1.1` (Verizon WNC-CR200A)
+- **Last updated:** 2026-06-29
 
 ---
 

@@ -1,9 +1,9 @@
 # SeasonalVPN — Network Map
-**Main-LAN host:** `192.168.1.22`
-**IPv4 VPN subnet:** `10.88.0.0/24`
-**IPv6 VPN ULA:** `fd97:418:22dd:88::/64`
-**VPN gateways:** `10.88.0.1` / `fd97:418:22dd:88::1`
-**Last updated:** 2026-06-29
+- **Main-LAN host:** `192.168.1.22`
+- **IPv4 VPN subnet:** `10.88.0.0/24`
+- **IPv6 VPN ULA:** `fd97:418:22dd:88::/64`
+- **VPN gateways:** `10.88.0.1` / `fd97:418:22dd:88::1`
+- **Last updated:** 2026-06-29
 
 ---
 

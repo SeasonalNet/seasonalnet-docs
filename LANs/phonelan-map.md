@@ -1,9 +1,9 @@
 # SeasonalNet Phone-LAN — Network Map
-**IPv4 subnet:** `10.30.0.0/24`
-**IPv6 ULA:** `fd97:418:22dd:30::/64`
-**Gateway reservation:** `10.30.0.1` / `fd97:418:22dd:30::1`
-**Planned segment/VLAN ID:** `30`
-**Last updated:** 2026-06-29
+- **IPv4 subnet:** `10.30.0.0/24`
+- **IPv6 ULA:** `fd97:418:22dd:30::/64`
+- **Gateway reservation:** `10.30.0.1` / `fd97:418:22dd:30::1`
+- **Planned segment/VLAN ID:** `30`
+- **Last updated:** 2026-06-29
 
 ---
 

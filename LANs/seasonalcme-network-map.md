@@ -1,11 +1,11 @@
 # SeasonalCME — Network Map
-**Voice subnet:** `10.42.0.0/24` (VLAN 10)
-**Management subnet:** `10.42.2.0/24` (VLAN 42)
-**Voice IPv6 ULA:** `fd97:418:22dd:10::/64`
-**Management IPv6 ULA:** `fd97:418:22dd:42::/64`
-**Voice gateway:** `10.42.0.1` / `fd97:418:22dd:10::1` (SeasonalEDGE-R1 `Gi0/1`)
-**Management gateway:** `10.42.2.1` / `fd97:418:22dd:42::1` (SeasonalEDGE-R1 `Vlan42`)
-**Last updated:** 2026-06-29
+- **Voice subnet:** `10.42.0.0/24` (VLAN 10)
+- **Management subnet:** `10.42.2.0/24` (VLAN 42)
+- **Voice IPv6 ULA:** `fd97:418:22dd:10::/64`
+- **Management IPv6 ULA:** `fd97:418:22dd:42::/64`
+- **Voice gateway:** `10.42.0.1` / `fd97:418:22dd:10::1` (SeasonalEDGE-R1 `Gi0/1`)
+- **Management gateway:** `10.42.2.1` / `fd97:418:22dd:42::1` (SeasonalEDGE-R1 `Vlan42`)
+- **Last updated:** 2026-06-29
 
 ---
 
