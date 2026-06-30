@@ -1,7 +1,7 @@
 # SeasonalNet Privacy Notice
 
-**Effective date:** June 29, 2026
-**Last updated:** June 29, 2026
+- **Effective date:** June 29, 2026
+- **Last updated:** June 29, 2026
 
 ## 1. Overview
 

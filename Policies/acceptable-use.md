@@ -1,7 +1,7 @@
 # SeasonalNet Acceptable Use Policy
 
-**Effective date:** June 29, 2026
-**Last updated:** June 29, 2026
+- **Effective date:** June 29, 2026
+- **Last updated:** June 29, 2026
 
 ## 1. Purpose
 
