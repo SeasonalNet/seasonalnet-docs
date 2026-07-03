@@ -32,8 +32,8 @@ Static markdown documentation for SeasonalNet, a self-managed homelab operating 
 | Segment | Subnet(s) | Map file |
 |---|---|---|
 | Main LAN | `192.168.1.0/24`; native ISP IPv6 | `LANs/seasonalnet-lan-map.md` |
-| SeasonalCME Voice | `10.42.0.0/24`, `fd97:418:22dd:10::/64` (VLAN 10) | `LANs/seasonalcme-network-map.md` |
-| SeasonalCME Management | `10.42.2.0/24`, `fd97:418:22dd:42::/64` (VLAN 42) | `LANs/seasonalcme-network-map.md` |
+| SeasonalCME Voice | `10.10.0.0/24`, `fd97:418:22dd:10::/64` (VLAN 10) | `LANs/seasonalcme-network-map.md` |
+| SeasonalCME Management | `10.42.0.0/24`, `fd97:418:22dd:42::/64` (VLAN 42) | `LANs/seasonalcme-network-map.md` |
 | Phone-LAN | `10.30.0.0/24`, `fd97:418:22dd:30::/64` (planned VLAN/segment 30) | `LANs/phonelan-map.md` |
 | SeasonalVPN | `10.88.0.0/24`, `fd97:418:22dd:88::/64` | `LANs/seasonalvpn-network-map.md` |
 
@@ -71,7 +71,10 @@ SeasonalCME segments are behind SeasonalEDGE-R1 (`192.168.1.4`). SeasonalVPN is 
 | `192.168.1.33` | SeasonalR340-iDRAC | Dell PowerEdge R340 out-of-band management |
 | `192.168.1.40` | seasonal-victus | Ubuntu desktop/admin workstation |
 | `192.168.1.41` | seasonal-teal-laptop | Ubuntu admin/build laptop |
-| `10.42.0.10` / `fd97:418:22dd:10::10` | SeasonalCME-R1 | Cisco CME call-control node |
+| `10.10.0.10` / `fd97:418:22dd:10::10` | SeasonalCME-R1 | Cisco CME call-control node |
+| `10.42.0.2` | SeasonalNet-SW1 | Primary non-PoE switch; IPv4-only routed management |
+| `10.42.0.3` / `fd97:418:22dd:42::3` | SeasonalNet-SW2 | Secondary PoE switch / dual-stack management |
+| `10.10.0.4` | SeasonalAP-3602i | SeasonalCME Voice VLAN access point |
 
 ---
 

@@ -23,7 +23,7 @@ Pages:
 
 - [Topology overview](NETWORK.md) — top-level topology, ULA allocation, routing, and segment index
 - [Main LAN](LANs/seasonalnet-lan-map.md) — Main LAN (`192.168.1.0/24`, native ISP IPv6)
-- [SeasonalCME](LANs/seasonalcme-network-map.md) — SeasonalCME lab (`10.42.0.0/24`, `10.42.2.0/24`, routed ULA)
+- [SeasonalCME](LANs/seasonalcme-network-map.md) — SeasonalCME lab (`10.10.0.0/24`, `10.42.0.0/24`, routed ULA)
 - [Phone-LAN](LANs/phonelan-map.md) — Phone-LAN (`10.30.0.0/24`, `fd97:418:22dd:30::/64`)
 - [SeasonalVPN](LANs/seasonalvpn-network-map.md) — Defguard/WireGuard VPN LAN (`10.88.0.0/24`, `fd97:418:22dd:88::/64`)
 
