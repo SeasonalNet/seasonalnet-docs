@@ -34,12 +34,12 @@ Static markdown documentation for SeasonalNet, a self-managed homelab operating 
 | Main LAN | `192.168.1.0/24`; native ISP IPv6 | `LANs/seasonalnet-lan-map.md` |
 | SeasonalCME Voice | `10.10.0.0/24`, `fd97:418:22dd:10::/64` (VLAN 10) | `LANs/seasonalcme-network-map.md` |
 | SeasonalCME Management | `10.42.0.0/24`, `fd97:418:22dd:42::/64` (VLAN 42) | `LANs/seasonalcme-network-map.md` |
-| Phone-LAN | `10.30.0.0/24`, `fd97:418:22dd:30::/64` (planned VLAN/segment 30) | `LANs/phonelan-map.md` |
+| Phone-LAN | `10.30.0.0/24`, `fd97:418:22dd:30::/64` (VLAN 30) | `LANs/phonelan-map.md` |
 | SeasonalVPN | `10.88.0.0/24`, `fd97:418:22dd:88::/64` | `LANs/seasonalvpn-network-map.md` |
 
 All routed internal IPv6 ULAs are allocated from the SeasonalNet site prefix `fd97:418:22dd::/48`. The fourth hextet is a human-readable segment identifier matching the printed VLAN/segment number where practical. Each LAN receives a `/64`; ordinary LANs must not be assigned longer or shorter host prefixes without a documented exception.
 
-SeasonalCME segments are behind SeasonalEDGE-R1 (`192.168.1.4`). SeasonalVPN is hosted by the SeasonalVPN VM (`192.168.1.22`). Phone-LAN no longer uses SeasonalPBX as its router, NAT boundary, DHCP server, or RA source.
+SeasonalNet-DSW1 is the Layer-3 distribution core for VLANs 10, 30, and 42. FW4C (`192.168.1.5`) is the production edge firewall/router reached over the `10.255.255.0/30` / `fd97:418:22dd:255::/64` transit. SeasonalVPN is hosted by the SeasonalVPN VM (`192.168.1.22`). SeasonalPBX remains a PBX service endpoint and does not route Phone-LAN.
 
 ---
 
@@ -48,7 +48,8 @@ SeasonalCME segments are behind SeasonalEDGE-R1 (`192.168.1.4`). SeasonalVPN is 
 | Address | Device | Role |
 |---|---|---|
 | `192.168.1.1` | Verizon WNC-CR200A | Internet gateway and Main-LAN router |
-| `192.168.1.4` | SeasonalEDGE-R1 | SeasonalCME lab edge router |
+| `192.168.1.2` – `192.168.1.4` | Reserved | Former bridge/EDGE infrastructure assignments |
+| `192.168.1.5` | FW4C | Production OpenWrt edge firewall/router |
 | `192.168.1.6` | SeasonalAuth | Authentik / identity service |
 | `192.168.1.7` | SeasonalForge | Forgejo / source control |
 | `192.168.1.8` | SeasonalWeb / SeasonalNet | NGINX reverse proxy / Next.js SPAs / docs site |
@@ -71,9 +72,17 @@ SeasonalCME segments are behind SeasonalEDGE-R1 (`192.168.1.4`). SeasonalVPN is 
 | `192.168.1.33` | SeasonalR340-iDRAC | Dell PowerEdge R340 out-of-band management |
 | `192.168.1.40` | seasonal-victus | Ubuntu desktop/admin workstation |
 | `192.168.1.41` | seasonal-teal-laptop | Ubuntu admin/build laptop |
+| `192.168.1.52` | SeasonalBridge-ROOT | Legacy Aironet root bridge |
+| `192.168.1.53` | SeasonalBridge-NONROOT | Legacy Aironet non-root bridge; quarantined as a production path |
+| `192.168.1.54` | SeasonalNet-NP-R1 | Cisco 1921 non-production lab router |
+| `10.10.0.1` / `10.30.0.1` / `10.42.0.1` | SeasonalNet-DSW1 | VLAN 10/30/42 IPv4 gateways and Layer-3 distribution core |
+| `fd97:418:22dd:10::1` / `fd97:418:22dd:30::1` / `fd97:418:22dd:42::1` | SeasonalNet-DSW1 | VLAN 10/30/42 IPv6 gateways |
+| `10.255.255.1` / `fd97:418:22dd:255::1` | SeasonalNet-DSW1 | Routed transit endpoint toward FW4C |
+| `10.255.255.2` / `fd97:418:22dd:255::2` | FW4C | Routed transit endpoint toward DSW1 |
 | `10.10.0.10` / `fd97:418:22dd:10::10` | SeasonalCME-R1 | Cisco CME call-control node |
 | `10.42.0.2` | SeasonalNet-SW1 | Primary non-PoE switch; IPv4-only routed management |
-| `10.42.0.3` / `fd97:418:22dd:42::3` | SeasonalNet-SW2 | Secondary PoE switch / dual-stack management |
+| `10.42.0.3` / `fd97:418:22dd:42::3` | SeasonalNet-SW2 | PoE access switch / dual-stack management |
+| `10.42.0.4` / `fd97:418:22dd:42::4` | SeasonalNet-SW3 | Compact Phone-LAN PoE access switch / dual-stack management |
 | `10.10.0.4` | SeasonalAP-3602i | SeasonalCME Voice VLAN access point |
 
 ---
@@ -83,11 +92,11 @@ SeasonalCME segments are behind SeasonalEDGE-R1 (`192.168.1.4`). SeasonalVPN is 
 - Each LAN map includes address bands, infrastructure devices, routing/services boundaries, a topology summary, and known remaining items.
 - Static addresses are configured on-device. DHCP pools are documented by range rather than as stable client identity.
 - Main LAN uses native ISP-assigned IPv6 from the CR200A; do not assign the SeasonalNet ULA to Main LAN.
-- The authoritative ULA root is `fd97:418:22dd::/48`. Assigned `/64`s currently use segment IDs `10`, `30`, `42`, and `88`.
+- The authoritative ULA root is `fd97:418:22dd::/48`. Assigned `/64`s currently use segment IDs `10`, `30`, `42`, `88`, and `255`.
 - The old `fd42:*` prefixes are retired or transitional legacy space and must not be used for new assignments.
-- SeasonalCME uses OSPFv2 process 42 for IPv4 and OSPFv3 process 42 for IPv6 between SeasonalEDGE-R1 and SeasonalCME-R1.
-- CR200A primary static routes use metric `10`; future alternate or backup routes use metric `50` or higher.
-- Phone-LAN no longer uses SeasonalPBX as its router. The `10.30.0.1` / `fd97:418:22dd:30::1` reservation belongs to the future Phone-LAN routing boundary.
+- OSPFv2 and OSPFv3 run between DSW1 and FW4C over the routed transit and between DSW1 and SeasonalCME-R1 over Voice VLAN 10. Process IDs are locally significant.
+- CR200A primary static routes use metric `10`; VLANs 10, 30, and 42 return through FW4C at `192.168.1.5`, while SeasonalVPN returns through `192.168.1.22`. Future alternate or backup routes use metric `50` or higher.
+- Phone-LAN no longer uses SeasonalPBX as its router. SeasonalNet-DSW1 owns `10.30.0.1` / `fd97:418:22dd:30::1` on `Vlan30`.
 
 ---
 
