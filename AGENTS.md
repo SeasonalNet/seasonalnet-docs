@@ -33,13 +33,16 @@ Static markdown documentation for SeasonalNet, a self-managed homelab operating 
 |---|---|---|
 | Main LAN | `192.168.1.0/24`; native ISP IPv6 | `LANs/seasonalnet-lan-map.md` |
 | SeasonalCME Voice | `10.10.0.0/24`, `fd97:418:22dd:10::/64` (VLAN 10) | `LANs/seasonalcme-network-map.md` |
-| SeasonalCME Management | `10.42.0.0/24`, `fd97:418:22dd:42::/64` (VLAN 42) | `LANs/seasonalcme-network-map.md` |
+| NET-MGMT | `10.40.0.0/24`, `fd97:418:22dd:40::/64` (VLAN 40) | `LANs/management-vlans-map.md` |
+| BMC-MGMT | `10.41.0.0/24`, `fd97:418:22dd:41::/64` (VLAN 41) | `LANs/management-vlans-map.md` |
+| CME-MGMT | `10.42.0.0/24`, `fd97:418:22dd:42::/64` (VLAN 42) | `LANs/management-vlans-map.md` |
+| HOST-MGMT | `10.43.0.0/24`, `fd97:418:22dd:43::/64` (VLAN 43) | `LANs/management-vlans-map.md` |
 | Phone-LAN | `10.30.0.0/24`, `fd97:418:22dd:30::/64` (VLAN 30) | `LANs/phonelan-map.md` |
 | SeasonalVPN | `10.88.0.0/24`, `fd97:418:22dd:88::/64` | `LANs/seasonalvpn-network-map.md` |
 
 All routed internal IPv6 ULAs are allocated from the SeasonalNet site prefix `fd97:418:22dd::/48`. The fourth hextet is a human-readable segment identifier matching the printed VLAN/segment number where practical. Each LAN receives a `/64`; ordinary LANs must not be assigned longer or shorter host prefixes without a documented exception.
 
-SeasonalNet-DSW1 is the Layer-3 distribution core for VLANs 10, 30, and 42. FW4C (`192.168.1.5`) is the production edge firewall/router reached over the `10.255.255.0/30` / `fd97:418:22dd:255::/64` transit. SeasonalVPN is hosted by the SeasonalVPN VM (`192.168.1.22`). SeasonalPBX remains a PBX service endpoint and does not route Phone-LAN.
+SeasonalNet-DSW1 is the Layer-3 distribution core for VLANs 10, 30, 40, 41, 42, and 43. FW4C (`192.168.1.5`) is the production edge firewall/router reached over the `10.255.255.0/30` / `fd97:418:22dd:255::/64` transit. SeasonalVPN is hosted by the SeasonalVPN VM (`192.168.1.22`). SeasonalPBX remains a PBX service endpoint and does not route Phone-LAN.
 
 ---
 
@@ -68,21 +71,25 @@ SeasonalNet-DSW1 is the Layer-3 distribution core for VLANs 10, 30, and 42. FW4C
 | `192.168.1.22` | SeasonalVPN | Defguard/WireGuard VPN and routed VPN-LAN gateway |
 | `192.168.1.30` | SeasonalR230 | Dell PowerEdge R230 / primary Proxmox VM host |
 | `192.168.1.31` | SeasonalR340 | Dell PowerEdge R340 / secondary Proxmox VM host |
-| `192.168.1.32` | SeasonalR230-iDRAC | Dell PowerEdge R230 out-of-band management |
-| `192.168.1.33` | SeasonalR340-iDRAC | Dell PowerEdge R340 out-of-band management |
+| `192.168.1.32` | Free | Former SeasonalR230-iDRAC Main-LAN address; BMC moved to `10.41.0.32` |
+| `192.168.1.33` | Free | Former SeasonalR340-iDRAC Main-LAN address; BMC moved to `10.41.0.33` |
 | `192.168.1.40` | seasonal-victus | Ubuntu desktop/admin workstation |
 | `192.168.1.41` | seasonal-teal-laptop | Ubuntu admin/build laptop |
 | `192.168.1.52` | SeasonalBridge-ROOT | Legacy Aironet root bridge |
 | `192.168.1.53` | SeasonalBridge-NONROOT | Legacy Aironet non-root bridge; quarantined as a production path |
 | `192.168.1.54` | SeasonalNet-NP-R1 | Cisco 1921 non-production lab router |
-| `10.10.0.1` / `10.30.0.1` / `10.42.0.1` | SeasonalNet-DSW1 | VLAN 10/30/42 IPv4 gateways and Layer-3 distribution core |
-| `fd97:418:22dd:10::1` / `fd97:418:22dd:30::1` / `fd97:418:22dd:42::1` | SeasonalNet-DSW1 | VLAN 10/30/42 IPv6 gateways |
+| `10.10.0.1` / `10.30.0.1` / `10.40.0.1` / `10.41.0.1` / `10.42.0.1` / `10.43.0.1` | SeasonalNet-DSW1 | VLAN 10/30/40/41/42/43 IPv4 gateways and Layer-3 distribution core |
+| `fd97:418:22dd:10::1` / `fd97:418:22dd:30::1` / `fd97:418:22dd:40::1` / `fd97:418:22dd:41::1` / `fd97:418:22dd:42::1` / `fd97:418:22dd:43::1` | SeasonalNet-DSW1 | Corresponding routed ULA gateways under `fd97:418:22dd::/48` |
 | `10.255.255.1` / `fd97:418:22dd:255::1` | SeasonalNet-DSW1 | Routed transit endpoint toward FW4C |
 | `10.255.255.2` / `fd97:418:22dd:255::2` | FW4C | Routed transit endpoint toward DSW1 |
 | `10.10.0.10` / `fd97:418:22dd:10::10` | SeasonalCME-R1 | Cisco CME call-control node |
-| `10.42.0.2` | SeasonalNet-SW1 | Primary non-PoE switch; IPv4-only routed management |
-| `10.42.0.3` / `fd97:418:22dd:42::3` | SeasonalNet-SW2 | PoE access switch / dual-stack management |
-| `10.42.0.4` / `fd97:418:22dd:42::4` | SeasonalNet-SW3 | Compact Phone-LAN PoE access switch / dual-stack management |
+| `10.40.0.0/24` / `fd97:418:22dd:40::/64` | NET-MGMT | Target network for switch/general network-device management; migration from VLAN 42 is scheduled |
+| `10.41.0.32` | SeasonalR230-iDRAC | R230 out-of-band management on BMC-MGMT/VLAN 41 |
+| `10.41.0.33` | SeasonalR340-iDRAC | R340 out-of-band management on BMC-MGMT/VLAN 41 |
+| `10.42.0.2` | SeasonalNet-SW1 | Current transitional VLAN 42 management; scheduled for NET-MGMT |
+| `10.42.0.3` / `fd97:418:22dd:42::3` | SeasonalNet-SW2 | Current transitional VLAN 42 management; scheduled for NET-MGMT |
+| `10.42.0.4` / `fd97:418:22dd:42::4` | SeasonalNet-SW3 | Current transitional VLAN 42 management; scheduled for NET-MGMT |
+| `10.43.0.0/24` / `fd97:418:22dd:43::/64` | HOST-MGMT | Routed/reserved host-management segment; no host cutover yet |
 | `10.10.0.4` | SeasonalAP-3602i | SeasonalCME Voice VLAN access point |
 
 ---
@@ -92,10 +99,10 @@ SeasonalNet-DSW1 is the Layer-3 distribution core for VLANs 10, 30, and 42. FW4C
 - Each LAN map includes address bands, infrastructure devices, routing/services boundaries, a topology summary, and known remaining items.
 - Static addresses are configured on-device. DHCP pools are documented by range rather than as stable client identity.
 - Main LAN uses native ISP-assigned IPv6 from the CR200A; do not assign the SeasonalNet ULA to Main LAN.
-- The authoritative ULA root is `fd97:418:22dd::/48`. Assigned `/64`s currently use segment IDs `10`, `30`, `42`, `88`, and `255`.
+- The authoritative ULA root is `fd97:418:22dd::/48`. Assigned `/64`s currently use segment IDs `10`, `30`, `40`, `41`, `42`, `43`, `88`, and `255`.
 - The old `fd42:*` prefixes are retired or transitional legacy space and must not be used for new assignments.
 - OSPFv2 and OSPFv3 run between DSW1 and FW4C over the routed transit and between DSW1 and SeasonalCME-R1 over Voice VLAN 10. Process IDs are locally significant.
-- CR200A primary static routes use metric `10`; VLANs 10, 30, and 42 return through FW4C at `192.168.1.5`, while SeasonalVPN returns through `192.168.1.22`. Future alternate or backup routes use metric `50` or higher.
+- CR200A primary static IPv4 routes use metric `10`; VLANs 10, 30, 40, 41, 42, and 43 return through FW4C at `192.168.1.5`, while SeasonalVPN returns through `192.168.1.22`. Future alternate or backup routes use metric `50` or higher.
 - Phone-LAN no longer uses SeasonalPBX as its router. SeasonalNet-DSW1 owns `10.30.0.1` / `fd97:418:22dd:30::1` on `Vlan30`.
 
 ---
