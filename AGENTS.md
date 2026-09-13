@@ -42,7 +42,7 @@ Static markdown documentation for SeasonalNet, a self-managed homelab operating 
 
 All routed internal IPv6 ULAs are allocated from the SeasonalNet site prefix `fd97:418:22dd::/48`. The fourth hextet is a human-readable segment identifier matching the printed VLAN/segment number where practical. Each LAN receives a `/64`; ordinary LANs must not be assigned longer or shorter host prefixes without a documented exception.
 
-SeasonalNet-DSW1 is the Layer-3 distribution core for VLANs 10, 30, 40, 41, 42, and 43. FW4C (`192.168.1.5`) is the production edge firewall/router reached over the `10.255.255.0/30` / `fd97:418:22dd:255::/64` transit. SeasonalVPN is hosted by the SeasonalVPN VM (`192.168.1.22`). SeasonalPBX remains a PBX service endpoint and does not route Phone-LAN.
+SeasonalNet-DSW1 is the Layer-3 distribution core for VLANs 10, 30, 40, 41, 42, and 43. SeasonalNet-ASW1 is the primary PoE+ access/aggregation switch and reaches DSW1 over a two-member LACP `Po1`; SeasonalNet-SW3 retains its direct DSW1 fiber uplink plus a redundant trunk to ASW1. FW4C (`192.168.1.5`) is the production edge firewall/router reached over the `10.255.255.0/30` / `fd97:418:22dd:255::/64` transit. SeasonalVPN is hosted by the SeasonalVPN VM (`192.168.1.22`). SeasonalPBX remains a PBX service endpoint and does not route Phone-LAN.
 
 ---
 
@@ -83,14 +83,15 @@ SeasonalNet-DSW1 is the Layer-3 distribution core for VLANs 10, 30, 40, 41, 42, 
 | `10.255.255.1` / `fd97:418:22dd:255::1` | SeasonalNet-DSW1 | Routed transit endpoint toward FW4C |
 | `10.255.255.2` / `fd97:418:22dd:255::2` | FW4C | Routed transit endpoint toward DSW1 |
 | `10.10.0.10` / `fd97:418:22dd:10::10` | SeasonalCME-R1 | Cisco CME call-control node |
-| `10.40.0.0/24` / `fd97:418:22dd:40::/64` | NET-MGMT | Target network for switch/general network-device management; migration from VLAN 42 is scheduled |
+| `10.40.0.0/24` / `fd97:418:22dd:40::/64` | NET-MGMT | Active general network-device management network |
+| `10.40.0.2` / `fd97:418:22dd:40::2` | SeasonalNet-ASW1 | Access-switch management on NET-MGMT |
+| `10.40.0.3` / `fd97:418:22dd:40::3` | SeasonalNet-SW3 | Compact access-switch management on NET-MGMT |
+| `10.40.0.4` / `fd97:418:22dd:40::4` | SeasonalAP-3602i | Autonomous AP management; service WLAN remains on VLAN 10 |
+| `10.40.0.5` / `fd97:418:22dd:40::5` | SeasonalAP-2702E | Autonomous AP management; service WLAN remains on VLAN 30 |
 | `10.41.0.32` | SeasonalR230-iDRAC | R230 out-of-band management on BMC-MGMT/VLAN 41 |
 | `10.41.0.33` | SeasonalR340-iDRAC | R340 out-of-band management on BMC-MGMT/VLAN 41 |
-| `10.42.0.2` | SeasonalNet-SW1 | Current transitional VLAN 42 management; scheduled for NET-MGMT |
-| `10.42.0.3` / `fd97:418:22dd:42::3` | SeasonalNet-SW2 | Current transitional VLAN 42 management; scheduled for NET-MGMT |
-| `10.42.0.4` / `fd97:418:22dd:42::4` | SeasonalNet-SW3 | Current transitional VLAN 42 management; scheduled for NET-MGMT |
+| `10.42.0.2` / `fd97:418:22dd:42::2` | SeasonalCME-R1 | CME-specific management on `Gi0/0.42` |
 | `10.43.0.0/24` / `fd97:418:22dd:43::/64` | HOST-MGMT | Routed/reserved host-management segment; no host cutover yet |
-| `10.10.0.4` | SeasonalAP-3602i | SeasonalCME Voice VLAN access point |
 
 ---
 

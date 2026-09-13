@@ -23,7 +23,7 @@ Pages:
 
 - [Topology overview](NETWORK.md) — top-level topology, ULA allocation, routing, and segment index
 - [Main LAN](LANs/seasonalnet-lan-map.md) — Main LAN (`192.168.1.0/24`, native ISP IPv6)
-- [SeasonalCME](LANs/seasonalcme-network-map.md) — SeasonalCME voice/control plane (`10.10.0.0/24`) and current CME-MGMT transition state
+- [SeasonalCME](LANs/seasonalcme-network-map.md) — SeasonalCME voice/control plane (`10.10.0.0/24`) and CME-MGMT (`10.42.0.0/24`)
 - [Management VLANs](LANs/management-vlans-map.md) — VLANs 40–43 (`NET-MGMT`, `BMC-MGMT`, `CME-MGMT`, `HOST-MGMT`)
 - [Phone-LAN](LANs/phonelan-map.md) — Phone-LAN (`10.30.0.0/24`, `fd97:418:22dd:30::/64`)
 - [SeasonalVPN](LANs/seasonalvpn-network-map.md) — Defguard/WireGuard VPN LAN (`10.88.0.0/24`, `fd97:418:22dd:88::/64`)
